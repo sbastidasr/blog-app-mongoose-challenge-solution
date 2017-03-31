@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const blogPostSchema = mongoose.Schema({
+const UserSchema = mongoose.Schema({
   author: {
     firstName: String,
     lastName: String
@@ -11,11 +11,11 @@ const blogPostSchema = mongoose.Schema({
 });
 
 
-blogPostSchema.virtual('authorName').get(function() {
+UserSchema.virtual('authorName').get(function() {
   return `${this.author.firstName} ${this.author.lastName}`.trim();
 });
 
-blogPostSchema.methods.apiRepr = function() {
+UserSchema.methods.apiRepr = function() {
   return {
     id: this._id,
     author: this.authorName,
@@ -25,6 +25,6 @@ blogPostSchema.methods.apiRepr = function() {
   };
 }
 
-const BlogPost = mongoose.model('BlogPost', blogPostSchema);
+const User = mongoose.model('User', UserSchema);
 
-module.exports = {BlogPost};
+module.exports = {User};
